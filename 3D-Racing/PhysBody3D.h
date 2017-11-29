@@ -6,6 +6,7 @@
 class btRigidBody;
 class Module;
 
+// =================================================
 struct PhysBody3D
 {
 	friend class ModulePhysics3D;
@@ -19,7 +20,7 @@ public:
 	void SetPos(float x, float y, float z);
 
 private:
-	btRigidBody* body;
+	btRigidBody* body = nullptr;
 
 public:
 	p2List<Module*> collision_listeners;

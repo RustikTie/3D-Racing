@@ -11,6 +11,8 @@
 
 class DebugDrawer;
 struct PhysBody3D;
+struct PhysVehicle3D;
+struct VehicleInfo;
 
 class ModulePhysics3D : public Module
 {
@@ -26,10 +28,12 @@ public:
 	bool CleanUp();
 
 	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
+	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
+	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
+	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 
-	// TODO 1: Code a method that adds a point 2 point contraint between two bodies
-	btPoint2PointConstraint p2pConstraint (btRigidBody& rbA, btRigidBody& rbB, const btVector3& pivotInA, const btVector3& pivotInB);
-	// TODO 3: Code a method that adds a hinge constraint between two bodies
+	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
+	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
 
 private:
 
@@ -40,11 +44,14 @@ private:
 	btBroadphaseInterface*				broad_phase;
 	btSequentialImpulseConstraintSolver* solver;
 	btDiscreteDynamicsWorld*			world;
+	btDefaultVehicleRaycaster*			vehicle_raycaster;
 	DebugDrawer*						debug_draw;
 
 	p2List<btCollisionShape*> shapes;
 	p2List<PhysBody3D*> bodies;
 	p2List<btDefaultMotionState*> motions;
+	p2List<btTypedConstraint*> constraints;
+	p2List<PhysVehicle3D*> vehicles;
 };
 
 class DebugDrawer : public btIDebugDraw
