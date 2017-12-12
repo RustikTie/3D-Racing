@@ -41,4 +41,10 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	Cube pathDef1;
+	Cube pathDef2;
+	Cube pathDef3;
+	Cube pathDef4;
+	Cube rampDef;
 };

@@ -20,6 +20,34 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
+	// Paths
+	pathDef1.SetPos(0, 0.5, 50);
+	pathDef1.size = { 25, 1, 100 };
+	App->physics->AddBody(pathDef1, 0);
+
+	/*pathDef2.SetPos(70, 0.5, 25);
+	pathDef2.size = { 25, 1, 150 };
+	App->physics->AddBody(pathDef2, 0);*/
+
+	rampDef.SetPos(0, 0.5, 50);
+	rampDef.size = { 25, 1, 100 };
+	rampDef.SetRotation(-20, { 1, 0, 0 });
+	App->physics->AddBody(rampDef, 0);
+
+	pathDef2.SetPos(0, 17.6, 116.8);
+	pathDef2.size = { 25, 1, 40 };
+	App->physics->AddBody(pathDef2, 0);
+
+	pathDef3.SetPos(15.8, 17.55, 147.5);
+	pathDef3.size = { 25, 1, 55 };
+	pathDef3.SetRotation(45, { 0, 1, 0 });
+	App->physics->AddBody(pathDef3, 0);
+
+	pathDef4.SetPos(71.6, 17.6, 163.4);
+	pathDef4.size = { 25, 1, 90 };
+	pathDef4.SetRotation(90, { 0, 1, 0 });
+	App->physics->AddBody(pathDef4, 0);
+
 	return ret;
 }
 
@@ -37,6 +65,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
+	
+	pathDef1.Render();	
+	pathDef2.Render();
+	rampDef.Render();
+	pathDef3.Render();
+	pathDef4.Render();
 
 	return UPDATE_CONTINUE;
 }
