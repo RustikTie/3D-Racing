@@ -21,6 +21,9 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
+	void CreatePath(vec3 _pos, vec3 _size, Color _color);
+
+
 public:
 	/*
 	PhysBody3D* pb_snake[MAX_SNAKE];
@@ -41,6 +44,8 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	p2List<Cube> cubes;
 
 	Cube pathDef1;
 	Cube pathDef2;
