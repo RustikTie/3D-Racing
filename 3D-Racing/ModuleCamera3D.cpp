@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "PhysVehicle3D.h"
 #include "ModuleCamera3D.h"
+#include "ModulePlayer.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -13,7 +14,7 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 0.0f, -5.0f);
+	Position = vec3(-10.0f, 10.0f, 10.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 }
 
@@ -112,6 +113,9 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 		/*Cube chassis(App->player->vehicle->info.chassis_size.x, App->player->vehicle->info.chassis_size.y, App->player->vehicle->info.chassis_size.z);
 		App->player->vehicle->vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);*/
+		btTransform carPosition = App->player->vehicle->vehicle->getChassisWorldTransform();
+		vec3 direction = { carPosition.getOrigin().getX(), carPosition.getOrigin().getY() + 5, carPosition.getOrigin().getZ() };
+		Look(Position, direction, true);
 	}
 
 

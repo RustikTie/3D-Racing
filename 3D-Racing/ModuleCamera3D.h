@@ -25,7 +25,7 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
-	bool free_camera = true;
+	bool free_camera = false;
 
 private:
 

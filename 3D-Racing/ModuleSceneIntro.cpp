@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "ModulePlayer.h"
 
 #define SIZE_ARRAY(_A_) (sizeof(_A_)/sizeof(_A_[0]))
 
@@ -11,8 +12,8 @@ static const float RW = 15.0f;
 static const float RH = 5.0f;
 
 // Circuit
-static const float CX = 150.0f;
-static const float CY = 80.0f;
+static const float C_X = 150.0f;
+static const float C_Y = 80.0f;
 
 // Circuit Def
 struct CubeDef {
@@ -22,10 +23,10 @@ struct CubeDef {
 };
 
 CubeDef cube_defs[] = {
-	{ RW, RH,  CX, 0,   RH/2,  CX/2,        true },
-	{ CY + RW, RH, RW,  -CY/2, CX + RW/2,   false },
-	{ RW, RH,  CX, -CY, RH/2,  CX/2,        false },
-	{ CY + RW, RH, RW,  -CY/2, RH/2, -RW/2, false }
+	{ RW, RH,  C_X, 0,   RH/2,  C_X/2,        true },
+	{ C_Y + RW, RH, RW,  -C_Y/2, C_X + RW/2,   false },
+	{ RW, RH,  C_X, -C_Y, RH/2,  C_X/2,        false },
+	{ C_Y + RW, RH, RW,  -C_Y/2, RH/2, -RW/2, false }
 };
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -41,8 +42,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
+
 
 	for (int i = 0; i < SIZE_ARRAY(cube_defs); i++)
 	{
