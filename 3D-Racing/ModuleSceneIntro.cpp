@@ -44,7 +44,7 @@ bool ModuleSceneIntro::Start()
 
 
 
-	for (int i = 0; i < SIZE_ARRAY(cube_defs); i++)
+	/*for (int i = 0; i < SIZE_ARRAY(cube_defs); i++)
 	{
 		Cube c;
 		c.size.Set(cube_defs[i].size_x, cube_defs[i].size_y, cube_defs[i].size_z);
@@ -52,7 +52,7 @@ bool ModuleSceneIntro::Start()
 		PhysBody3D *p = App->physics->AddBody(c);
 		if (cube_defs[i].add_collision_listener)
 			p->collision_listeners.add(this);
-	}
+	}*/
 
 	// Paths
 	rampDef.SetPos(0, 0.5, 50);
@@ -98,12 +98,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.color = Pink;
 	p.Render();
 
-	p2List_item<Cube>* s_item = cubes.getFirst();
+	/*p2List_item<Cube>* s_item = cubes.getFirst();
 	while (s_item)
 	{
 		s_item->data.Render();
 		s_item = s_item->next;
-	}
+	}*/
 	
 	rampDef.Render();
 	pathDef1.Render();

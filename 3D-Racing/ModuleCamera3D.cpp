@@ -115,6 +115,9 @@ update_status ModuleCamera3D::Update(float dt)
 		App->player->vehicle->vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);*/
 		btTransform carPosition = App->player->vehicle->vehicle->getChassisWorldTransform();
 		vec3 direction = { carPosition.getOrigin().getX(), carPosition.getOrigin().getY() + 5, carPosition.getOrigin().getZ() };
+		Position.x = direction.x;
+		Position.y = direction.y + 2;
+		Position.z = direction.z - 10;
 		Look(Position, direction, true);
 	}
 
