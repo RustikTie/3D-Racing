@@ -29,15 +29,14 @@ struct CubeDef {
 };
 
 CubeDef cube_defs[] = {
-	{4,4,4,	75, 179, 175,	Blue, 1, false, 0, { 0, 0, 0 },		true },
-	{5,5,5,	60, 180, 170,	Blue, 1, false, 0, { 0, 0, 0 },		true },
 	
 	{ 25, 1, 100, 0, 0.5, 50, White, 0, true, -20, { 1, 0, 0 } },
 	{ 25, 3, 100, 0, 1, 50, White },
 	{ 25, 1, 40, 0, 17.6, 116.18, White },
 	{ 25, 1, 55, 15.8, 17.55, 147.5, White, 0, true, 45, { 0, 1, 0 } },
 	{ 25, 1, 90, 71.6, 17.6, 163.4, White, 0, true, 90,{ 0, 1, 0 } },
-	{ 25,1,90, 108, 17.6, 131, White }
+	{ 25,1,90, 108, 17.6, 131, White },
+	{ 25, 1, 90, 108, 5.5, 0, White }
 };
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -96,7 +95,11 @@ bool ModuleSceneIntro::Start()
 
 	pathDef5.SetPos(108, 17.6, 131);
 	pathDef5.size = {25,1,90};
-	App->physics->AddBody(pathDef5, 0);*/
+	App->physics->AddBody(pathDef5, 0);	
+	
+	pathDef6.SetPos(108, 5.5, 0);
+	pathDef6.size = { 25, 1, 90 };
+	App->physics->AddBody(pathDef6, 0);*/
 
 	pillar1.SetPos(117.5, 7.5, 55);
 	pillar1.size = { 12,15,12 };
@@ -109,10 +112,6 @@ bool ModuleSceneIntro::Start()
 	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*body1, *body2, vec3{ 0,0,0 }, vec3{ 0, 0,0 }, vec3{ 0,1,0 }, vec3{ 0,1,0}, true);
 
 	hinge->setLimit(1, 0);
-
-	pathDef6.SetPos(108, 5.5, 0);
-	pathDef6.size = { 25, 1, 90 };
-	App->physics->AddBody(pathDef6, 0);
 
 	return ret;
 }
@@ -140,14 +139,6 @@ update_status ModuleSceneIntro::Update(float dt)
 		s_item = s_item->next;
 	}
 	
-
-	//rampDef.Render();
-	//pathDef1.Render();
-	//pathDef2.Render();	
-	//pathDef3.Render();
-	//pathDef4.Render();
-	//pathDef5.Render();
-	pathDef6.Render();
 	body1->GetTransform(&pillar1.transform);
 	pillar1.Render();
 	body2->GetTransform(&pillar2.transform);
