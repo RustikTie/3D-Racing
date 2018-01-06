@@ -101,15 +101,15 @@ bool ModuleSceneIntro::Start()
 	pathDef6.size = { 25, 1, 90 };
 	App->physics->AddBody(pathDef6, 0);*/
 
-	pillar1.SetPos(117.5, 7.5, 55);
+	pillar1.SetPos(117.5, 7.5, 70);
 	pillar1.size = { 12,15,12 };
 	body1 = App->physics->AddBody(pillar1,1000);
 
-	pillar2.SetPos(100, 5.5, 40);
-	pillar2.size = { 12, 11, 12 };
-	body2 = App->physics->AddBody(pillar2, 200);
+	pillar2.SetPos(100, 10, 55);
+	pillar2.size = { 25, 10, 1 };
+	body2 = App->physics->AddBody(pillar2, 1);
 
-	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*body1, *body2, vec3{ 0,0,0 }, vec3{ 0, 0,0 }, vec3{ 0,1,0 }, vec3{ 0,1,0}, true);
+	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*body1, *body2, vec3{ 0,0,0 }, vec3{ 10, 0,0 }, vec3{ 0,1,0}, vec3{0,1,0}, true);
 
 	hinge->setLimit(1, 0);
 
