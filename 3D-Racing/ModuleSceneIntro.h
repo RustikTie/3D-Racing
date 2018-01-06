@@ -53,7 +53,11 @@ public:
 	Cube pathDef4;
 	Cube rampDef;
 	Cube pathDef5;
+	Cube pathDef6;
 	Cube pillar1;
 	Cube pillar2;
 	Cube pillar3;
+
+	PhysBody3D* body1;
+	PhysBody3D* body2;
 };

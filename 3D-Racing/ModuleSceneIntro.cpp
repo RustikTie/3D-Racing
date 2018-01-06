@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "ModulePlayer.h"
+#include "ModulePhysics3D.h"
 
 #define SIZE_ARRAY(_A_) (sizeof(_A_)/sizeof(_A_[0]))
 
@@ -86,13 +87,19 @@ bool ModuleSceneIntro::Start()
 
 	pillar1.SetPos(117.5, 7.5, 55);
 	pillar1.size = { 12,15,12 };
-	PhysBody3D* body1 = App->physics->AddBody(pillar1, 0);
+	body1 = App->physics->AddBody(pillar1,1000);
 
 	pillar2.SetPos(100, 5.5, 40);
 	pillar2.size = { 12, 11, 12 };
-	PhysBody3D* body2 = App->physics->AddBody(pillar2, 0);
+	body2 = App->physics->AddBody(pillar2, 200);
 
-	//App->physics->AddConstraintHinge(body1, body2, {}, {}, )
+	btHingeConstraint* hinge = App->physics->AddConstraintHinge(*body1, *body2, vec3{ 0,0,0 }, vec3{ 0, 0,0 }, vec3{ 0,1,0 }, vec3{ 0,1,0}, true);
+
+	hinge->setLimit(1, 0);
+
+	pathDef6.SetPos(108, 5.5, 0);
+	pathDef6.size = { 25, 1, 90 };
+	App->physics->AddBody(pathDef6, 0);
 
 	return ret;
 }
@@ -126,7 +133,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	pathDef3.Render();
 	pathDef4.Render();
 	pathDef5.Render();
+	pathDef6.Render();
+	body1->GetTransform(&pillar1.transform);
 	pillar1.Render();
+	body2->GetTransform(&pillar2.transform);
 	pillar2.Render();
 
 	return UPDATE_CONTINUE;
