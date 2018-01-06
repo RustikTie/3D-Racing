@@ -19,14 +19,14 @@ static const float C_Y = 80.0f;
 struct CubeDef {
 	float size_x, size_y, size_z;
 	float pos_x, pos_y, pos_z;
+	Color _color;
 	bool add_collision_listener;
 };
 
 CubeDef cube_defs[] = {
-	{ RW, RH,  C_X, 0,   RH/2,  C_X/2,        true },
-	{ C_Y + RW, RH, RW,  -C_Y/2, C_X + RW/2,   false },
-	{ RW, RH,  C_X, -C_Y, RH/2,  C_X/2,        false },
-	{ C_Y + RW, RH, RW,  -C_Y/2, RH/2, -RW/2, false }
+	{4,4,4,	75, 179, 175,	Blue,		true },
+	{5,5,5,	60, 180, 170,	Blue,		true},
+	
 };
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -44,15 +44,16 @@ bool ModuleSceneIntro::Start()
 
 
 
-	/*for (int i = 0; i < SIZE_ARRAY(cube_defs); i++)
+	for (int i = 0; i < SIZE_ARRAY(cube_defs); i++)
 	{
 		Cube c;
 		c.size.Set(cube_defs[i].size_x, cube_defs[i].size_y, cube_defs[i].size_z);
 		c.SetPos(cube_defs[i].pos_x, cube_defs[i].pos_y, cube_defs[i].pos_z);
+		c.color = cube_defs[i]._color;
 		PhysBody3D *p = App->physics->AddBody(c);
 		if (cube_defs[i].add_collision_listener)
 			p->collision_listeners.add(this);
-	}*/
+	}
 
 	// Paths
 	rampDef.SetPos(0, 0.5, 50);
@@ -60,9 +61,9 @@ bool ModuleSceneIntro::Start()
 	rampDef.SetRotation(-20, { 1, 0, 0 });
 	App->physics->AddBody(rampDef, 0);
 
-	pathDef1.SetPos(0, 0.5, 50);
-	pathDef1.size = { 25, 1, 100 };
-	pathDef1.color = Black;
+	pathDef1.SetPos(0, 1, 50);
+	pathDef1.size = { 25, 3, 100 };
+	pathDef1.color = White;
 	App->physics->AddBody(pathDef1, 0);
 	
 	pathDef2.SetPos(0, 17.6, 116.8);
@@ -78,6 +79,20 @@ bool ModuleSceneIntro::Start()
 	pathDef4.size = { 25, 1, 90 };
 	pathDef4.SetRotation(90, { 0, 1, 0 });
 	App->physics->AddBody(pathDef4, 0);
+
+	pathDef5.SetPos(108, 17.6, 131);
+	pathDef5.size = {25,1,90};
+	App->physics->AddBody(pathDef5, 0);
+
+	pillar1.SetPos(117.5, 7.5, 55);
+	pillar1.size = { 12,15,12 };
+	PhysBody3D* body1 = App->physics->AddBody(pillar1, 0);
+
+	pillar2.SetPos(100, 5.5, 40);
+	pillar2.size = { 12, 11, 12 };
+	PhysBody3D* body2 = App->physics->AddBody(pillar2, 0);
+
+	//App->physics->AddConstraintHinge(body1, body2, {}, {}, )
 
 	return ret;
 }
@@ -98,18 +113,21 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.color = Pink;
 	p.Render();
 
-	/*p2List_item<Cube>* s_item = cubes.getFirst();
+	p2List_item<Cube>* s_item = cubes.getFirst();
 	while (s_item)
 	{
 		s_item->data.Render();
 		s_item = s_item->next;
-	}*/
+	}
 	
 	rampDef.Render();
 	pathDef1.Render();
 	pathDef2.Render();	
 	pathDef3.Render();
 	pathDef4.Render();
+	pathDef5.Render();
+	pillar1.Render();
+	pillar2.Render();
 
 	return UPDATE_CONTINUE;
 }

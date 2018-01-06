@@ -97,7 +97,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 5, 10);
 	
 	return true;
 }
@@ -135,6 +135,12 @@ update_status ModulePlayer::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		brake = BRAKE_POWER;
+	}
+
+	btVector3 position = vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	if (position.getY() < 1 || App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	{
+		vehicle->SetPos(0, 5, 10);	
 	}
 
 	vehicle->ApplyEngineForce(acceleration);

@@ -14,7 +14,7 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(-10.0f, 10.0f, 10.0f);
+	Position = vec3(-10.0f, 100.0f, 10.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 }
 
@@ -115,9 +115,9 @@ update_status ModuleCamera3D::Update(float dt)
 		App->player->vehicle->vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);*/
 		btTransform carPosition = App->player->vehicle->vehicle->getChassisWorldTransform();
 		vec3 direction = { carPosition.getOrigin().getX(), carPosition.getOrigin().getY() + 5, carPosition.getOrigin().getZ() };
-		Position.x = direction.x;
-		Position.y = direction.y + 2;
-		Position.z = direction.z - 10;
+		//Position.x = direction.x;
+		//Position.y = direction.y + 2;
+		//Position.z = direction.z - 10;
 		Look(Position, direction, true);
 	}
 

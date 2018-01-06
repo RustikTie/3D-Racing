@@ -52,4 +52,8 @@ public:
 	Cube pathDef3;
 	Cube pathDef4;
 	Cube rampDef;
+	Cube pathDef5;
+	Cube pillar1;
+	Cube pillar2;
+	Cube pillar3;
 };
