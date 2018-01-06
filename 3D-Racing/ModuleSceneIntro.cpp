@@ -21,13 +21,23 @@ struct CubeDef {
 	float size_x, size_y, size_z;
 	float pos_x, pos_y, pos_z;
 	Color _color;
-	bool add_collision_listener;
+	float _mass = 0;
+	bool _rotate = false;
+	float _angle = 0;
+	const vec3 _axis = { 0, 0, 0 };
+	bool add_collision_listener = false;
 };
 
 CubeDef cube_defs[] = {
-	{4,4,4,	75, 179, 175,	Blue,		true },
-	{5,5,5,	60, 180, 170,	Blue,		true},
+	{4,4,4,	75, 179, 175,	Blue, 1, false, 0, { 0, 0, 0 },		true },
+	{5,5,5,	60, 180, 170,	Blue, 1, false, 0, { 0, 0, 0 },		true },
 	
+	{ 25, 1, 100, 0, 0.5, 50, White, 0, true, -20, { 1, 0, 0 } },
+	{ 25, 3, 100, 0, 1, 50, White },
+	{ 25, 1, 40, 0, 17.6, 116.18, White },
+	{ 25, 1, 55, 15.8, 17.55, 147.5, White, 0, true, 45, { 0, 1, 0 } },
+	{ 25, 1, 90, 71.6, 17.6, 163.4, White, 0, true, 90,{ 0, 1, 0 } },
+	{ 25,1,90, 108, 17.6, 131, White }
 };
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -51,13 +61,16 @@ bool ModuleSceneIntro::Start()
 		c.size.Set(cube_defs[i].size_x, cube_defs[i].size_y, cube_defs[i].size_z);
 		c.SetPos(cube_defs[i].pos_x, cube_defs[i].pos_y, cube_defs[i].pos_z);
 		c.color = cube_defs[i]._color;
-		PhysBody3D *p = App->physics->AddBody(c);
+		if (cube_defs[i]._rotate)
+			c.SetRotation(cube_defs[i]._angle, cube_defs[i]._axis);
+		PhysBody3D *p = App->physics->AddBody(c, cube_defs[i]._mass);
 		if (cube_defs[i].add_collision_listener)
 			p->collision_listeners.add(this);
+		cubes.add(c);
 	}
 
 	// Paths
-	rampDef.SetPos(0, 0.5, 50);
+	/*rampDef.SetPos(0, 0.5, 50);
 	rampDef.size = { 25, 1, 100 };
 	rampDef.SetRotation(-20, { 1, 0, 0 });
 	App->physics->AddBody(rampDef, 0);
@@ -83,7 +96,7 @@ bool ModuleSceneIntro::Start()
 
 	pathDef5.SetPos(108, 17.6, 131);
 	pathDef5.size = {25,1,90};
-	App->physics->AddBody(pathDef5, 0);
+	App->physics->AddBody(pathDef5, 0);*/
 
 	pillar1.SetPos(117.5, 7.5, 70);
 	pillar1.size = { 12,15,12 };
@@ -127,12 +140,13 @@ update_status ModuleSceneIntro::Update(float dt)
 		s_item = s_item->next;
 	}
 	
-	rampDef.Render();
-	pathDef1.Render();
-	pathDef2.Render();	
-	pathDef3.Render();
-	pathDef4.Render();
-	pathDef5.Render();
+
+	//rampDef.Render();
+	//pathDef1.Render();
+	//pathDef2.Render();	
+	//pathDef3.Render();
+	//pathDef4.Render();
+	//pathDef5.Render();
 	pathDef6.Render();
 	body1->GetTransform(&pillar1.transform);
 	pillar1.Render();
