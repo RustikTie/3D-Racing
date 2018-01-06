@@ -31,12 +31,13 @@ struct CubeDef {
 CubeDef cube_defs[] = {
 	
 	{ 25, 1, 100, 0, 0.5, 50, White, 0, true, -20, { 1, 0, 0 } },
-	{ 25, 3, 100, 0, 1, 50, White },
+	{ 25, 3, 100, 0, 1, 30, White },
 	{ 25, 1, 40, 0, 17.6, 116.18, White },
 	{ 25, 1, 55, 15.8, 17.55, 147.5, White, 0, true, 45, { 0, 1, 0 } },
 	{ 25, 1, 90, 71.6, 17.6, 163.4, White, 0, true, 90,{ 0, 1, 0 } },
 	{ 25,1,90, 108, 17.6, 131, White },
-	{ 25, 1, 90, 108, 5.5, 0, White }
+	{ 25, 1, 90, 108, 5.5, 0, White },
+	{ 120, 3, 25, 47, 1, -32, White }
 };
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -68,38 +69,7 @@ bool ModuleSceneIntro::Start()
 		cubes.add(c);
 	}
 
-	// Paths
-	/*rampDef.SetPos(0, 0.5, 50);
-	rampDef.size = { 25, 1, 100 };
-	rampDef.SetRotation(-20, { 1, 0, 0 });
-	App->physics->AddBody(rampDef, 0);
-
-	pathDef1.SetPos(0, 1, 50);
-	pathDef1.size = { 25, 3, 100 };
-	pathDef1.color = White;
-	App->physics->AddBody(pathDef1, 0);
-	
-	pathDef2.SetPos(0, 17.6, 116.8);
-	pathDef2.size = { 25, 1, 40 };
-	App->physics->AddBody(pathDef2, 0);
-
-	pathDef3.SetPos(15.8, 17.55, 147.5);
-	pathDef3.size = { 25, 1, 55 };
-	pathDef3.SetRotation(45, { 0, 1, 0 });
-	App->physics->AddBody(pathDef3, 0);
-
-	pathDef4.SetPos(71.6, 17.6, 163.4);
-	pathDef4.size = { 25, 1, 90 };
-	pathDef4.SetRotation(90, { 0, 1, 0 });
-	App->physics->AddBody(pathDef4, 0);
-
-	pathDef5.SetPos(108, 17.6, 131);
-	pathDef5.size = {25,1,90};
-	App->physics->AddBody(pathDef5, 0);	
-	
-	pathDef6.SetPos(108, 5.5, 0);
-	pathDef6.size = { 25, 1, 90 };
-	App->physics->AddBody(pathDef6, 0);*/
+	// Pillars
 
 	pillar1.SetPos(117.5, 7.5, 70);
 	pillar1.size = { 12,15,12 };

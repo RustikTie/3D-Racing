@@ -138,7 +138,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	btVector3 position = vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	if (position.getY() < 1 || App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	if (position.getY() < 1 || App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		lives -= 1;
 		ResetVehicle();
